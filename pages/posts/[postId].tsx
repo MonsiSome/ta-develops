@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { NextPageContext } from 'next'
 import { MyPost } from '../../interfaces/posts'
+import axios from '../../axios/axios'
 
 interface PostPageProps {
   post: MyPost
@@ -15,9 +16,9 @@ export default function Post( {post: serverPost}: PostPageProps ) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`https://simple-blog-api.crew.red/posts/${router.query.postId}`)
-      const data = await response.json()
-      setPost(data)
+      const response = await axios.get(`${router.query.postId}`)
+      const dataPost: MyPost = await response.data
+      setPost(dataPost)
     }
     
     if(!serverPost) {
@@ -43,7 +44,7 @@ export default function Post( {post: serverPost}: PostPageProps ) {
 
 interface PostNextPageContext extends NextPageContext {
   query: {
-    id: string
+    postId: string
   }
 }
 
@@ -52,8 +53,8 @@ Post.getInitialProps = async({ query, req }: PostNextPageContext) => {
     return { post : null };
   } 
  
-  const response = await fetch(`https://simple-blog-api.crew.red/posts/${query.postId}`)
-  const post: MyPost[] = await response.json()
+  const response = await axios.get(`${query.postId}`)
+  const post: MyPost[] = await response.data
 
   return {
     post

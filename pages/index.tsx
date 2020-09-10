@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import {useRouter} from 'next/router'
 import { MyPost } from '../interfaces/posts'
 import { NextPageContext } from 'next'
+import axios from '../axios/axios'
 
 interface PostsPageProps {
   posts: MyPost[]
@@ -15,8 +16,8 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('https://simple-blog-api.crew.red/posts')
-      const json = await response.json()
+      const response = await axios.get('')
+      const json = await response.data
       setPosts(json)
     }
 
@@ -53,8 +54,8 @@ Index.getInitialProps = async({ req }: NextPageContext) => {
     return { post : null };
   }
 
-  const response = await fetch('https://simple-blog-api.crew.red/posts')
-  const posts: MyPost[] = await response.json()
+  const response = await axios.get('')
+  const posts: MyPost[] = await response.data
 
   return {
     posts
