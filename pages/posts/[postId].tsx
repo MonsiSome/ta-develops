@@ -5,6 +5,64 @@ import { useState, useEffect } from 'react'
 import { NextPageContext } from 'next'
 import { PostStructure } from '../../interfaces/posts'
 import axios from '../../axios/axios'
+import styled from 'styled-components/macro'
+
+const Loading = styled.p`
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.2em;
+`
+
+const Article = styled.article`
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.2em;
+  > h1 {
+    font-size: 2em;
+    text-align: start;
+  }
+  > p {
+    margin-top: 1.6em;
+  }
+`
+
+const Section = styled.section`
+  padding: 1.2em 0;
+  display: flex;
+  flex-direction: column;
+  > h3 {
+    font-weight: normal;
+    font-size: 1.4em;
+  }
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+  }
+`
+const Li = styled.li`
+  padding: 1.2em 0;
+`
+
+const NoComments = styled.p`
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.7);
+`
+
+const GoBack = styled.a`
+  display: inline-block;
+  margin: 3.4em 0;
+  padding: 1em 0;
+  width: 200px;
+  border: none;
+  border-bottom: 1px grey solid;
+  outline: none;
+
+  &:hover {
+    border-bottom: 1px rgb(116, 44, 250) solid;
+    cursor: pointer;
+  }
+`
 
 interface PostPageProps {
   post: PostStructure
@@ -29,26 +87,33 @@ export default function Post({ post: serverPost }: PostPageProps) {
   if (!post) {
     return (
       <MainLayout>
-        <p>Loading...</p>
+        <Loading>Loading...</Loading>
       </MainLayout>
     )
   }
 
   return (
     <MainLayout title={`Post ${post.id}`}>
-      <h1>{post.title}</h1>
-      <hr />
-      <p>{post.body}</p>
-      {!!post.comments.length
-        ? post.comments.map((comment) => (
-            <li key={comment.id}>
-              <p>{comment.body}</p>
-            </li>
-          ))
-        : null}
-      <Link href={'/'}>
-        <a>Go back to posts</a>
-      </Link>
+      <Article>
+        <h1>{post.title}</h1>
+        <hr />
+        <p>{post.body}</p>
+        <Section>
+          <h3>Comments</h3>
+          {!!post.comments.length ? (
+            <ul>
+              {post.comments.map((comment) => (
+                <Li key={comment.id}>{comment.body}</Li>
+              ))}
+            </ul>
+          ) : (
+            <NoComments>No comments...</NoComments>
+          )}
+          <Link href={'/'}>
+            <GoBack>Go back to posts</GoBack>
+          </Link>
+        </Section>
+      </Article>
     </MainLayout>
   )
 }

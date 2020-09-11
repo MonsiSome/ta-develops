@@ -4,6 +4,44 @@ import { useState, useEffect } from 'react'
 import { PostStructure } from '../interfaces/posts'
 import { NextPageContext } from 'next'
 import axios from '../axios/axios'
+import styled from 'styled-components/macro'
+
+const Loading = styled.p`
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.2em;
+`
+
+const HeaderPosts = styled.header`
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.2em;
+`
+
+const Ul = styled.ul`
+  width: 60%;
+  margin: 0 auto;
+  padding: 1.2em;
+  list-style: none;
+  > li {
+    padding: 0.2em;
+    text-align: start;
+    text-transform: uppercase;
+  }
+`
+
+const Anchor = styled.a`
+  text-decoration: none;
+  color: #000;
+  &:hover {
+    border-bottom: 1px rgb(116, 44, 250) solid;
+    cursor: pointer;
+  }
+  &:visited {
+    text-decoration: none;
+    color: #000;
+  }
+`
 
 interface PostsPageProps {
   posts: PostStructure[]
@@ -27,24 +65,26 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
   if (!posts) {
     return (
       <MainLayout>
-        <p>Loading...</p>
+        <Loading>Loading...</Loading>
       </MainLayout>
     )
   }
 
   return (
     <MainLayout>
-      <h1>Posts page</h1>
-      <p>Real stories & opinions about running an independent membership business.</p>
-      <ul>
+      <HeaderPosts>
+        <h1>Posts page</h1>
+        <p>Real stories & opinions about running an independent membership business.</p>
+      </HeaderPosts>
+      <Ul>
         {posts.map((post) => (
           <li key={post.id}>
             <Link href={`/posts/[postId]`} as={`/posts/${post.id}`}>
-              <a>{post.title}</a>
+              <Anchor>{post.title}</Anchor>
             </Link>
           </li>
         ))}
-      </ul>
+      </Ul>
     </MainLayout>
   )
 }
