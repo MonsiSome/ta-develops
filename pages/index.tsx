@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { MainLayout } from '../components/MainLayout'
 import { useState, useEffect } from 'react'
-import { MyPost } from '../interfaces/posts'
+import { PostStructure } from '../interfaces/posts'
 import { NextPageContext } from 'next'
 import axios from '../axios/axios'
 
 interface PostsPageProps {
-  posts: MyPost[]
+  posts: PostStructure[]
 }
 
 export default function Index({ posts: serverPosts }: PostsPageProps) {
@@ -55,7 +55,7 @@ Index.getInitialProps = async ({ req }: NextPageContext) => {
   }
 
   const response = await axios.get('')
-  const posts: MyPost[] = await response.data
+  const posts: PostStructure[] = await response.data
 
   return {
     posts,

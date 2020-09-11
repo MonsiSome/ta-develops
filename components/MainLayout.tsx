@@ -36,7 +36,7 @@ export function MainLayout({ children, title = 'Blog MVP' }) {
         <Link href={'/'}>
           <a>Home</a>
         </Link>
-        <Link href={'/posts/newPost'}>
+        <Link href={'/posts/createPost'}>
           <a>New Post</a>
         </Link>
       </Nav>

@@ -3,11 +3,11 @@ import { MainLayout } from '../../components/MainLayout'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { NextPageContext } from 'next'
-import { MyPost } from '../../interfaces/posts'
+import { PostStructure } from '../../interfaces/posts'
 import axios from '../../axios/axios'
 
 interface PostPageProps {
-  post: MyPost
+  post: PostStructure
 }
 
 export default function Post({ post: serverPost }: PostPageProps) {
@@ -16,9 +16,10 @@ export default function Post({ post: serverPost }: PostPageProps) {
 
   useEffect(() => {
     async function load() {
-      const response = await axios.get(`${router.query.postId}`)
-      const dataPost: MyPost = await response.data
+      const response = await axios.get(`${router.query.postId}?_embed=comments`)
+      const dataPost: PostStructure = await response.data
       setPost(dataPost)
+      console.log('Datapost:', dataPost)
     }
 
     if (!serverPost) {
@@ -39,6 +40,13 @@ export default function Post({ post: serverPost }: PostPageProps) {
       <h1>{post.title}</h1>
       <hr />
       <p>{post.body}</p>
+      {!!post.comments.length
+        ? post.comments.map((comment) => (
+            <li key={comment.id}>
+              <p>{comment.body}</p>
+            </li>
+          ))
+        : null}
       <Link href={'/'}>
         <a>Go back to posts</a>
       </Link>
@@ -58,7 +66,7 @@ Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
   }
 
   const response = await axios.get(`${query.postId}`)
-  const post: MyPost[] = await response.data
+  const post: PostStructure[] = await response.data
 
   return {
     post,
