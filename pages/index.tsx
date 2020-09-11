@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { MainLayout } from '../components/MainLayout'
 import { useState, useEffect } from 'react'
-import {useRouter} from 'next/router'
 import { MyPost } from '../interfaces/posts'
 import { NextPageContext } from 'next'
 import axios from '../axios/axios'
@@ -12,7 +11,6 @@ interface PostsPageProps {
 
 export default function Index({ posts: serverPosts }: PostsPageProps) {
   const [posts, setPosts] = useState(serverPosts)
-  const router = useRouter()
 
   useEffect(() => {
     async function load() {
@@ -21,15 +19,17 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
       setPosts(json)
     }
 
-    if(!serverPosts){
+    if (!serverPosts) {
       load()
     }
   }, [])
 
-  if(!posts) {
-    return <MainLayout>
-      <p>Loading...</p>
-    </MainLayout>
+  if (!posts) {
+    return (
+      <MainLayout>
+        <p>Loading...</p>
+      </MainLayout>
+    )
   }
 
   return (
@@ -37,7 +37,7 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
       <h1>Posts page</h1>
       <p>Real stories & opinions about running an independent membership business.</p>
       <ul>
-        {posts.map(post => (
+        {posts.map((post) => (
           <li key={post.id}>
             <Link href={`/posts/[postId]`} as={`/posts/${post.id}`}>
               <a>{post.title}</a>
@@ -49,15 +49,15 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
   )
 }
 
-Index.getInitialProps = async({ req }: NextPageContext) => {
-  if(!req) {
-    return { post : null };
+Index.getInitialProps = async ({ req }: NextPageContext) => {
+  if (!req) {
+    return { post: null }
   }
 
   const response = await axios.get('')
   const posts: MyPost[] = await response.data
 
   return {
-    posts
+    posts,
   }
 }

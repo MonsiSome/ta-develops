@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Head from "next/head";
-import styled from "styled-components/macro";
+import Link from 'next/link'
+import Head from 'next/head'
+import styled from 'styled-components/macro'
 
 const Nav = styled.nav`
   position: fixed;
@@ -16,14 +16,14 @@ const Nav = styled.nav`
     color: #fff;
     text-decoration: none;
   }
-`;
+`
 
 const Main = styled.main`
   margin-top: 60px;
   padding: 1rem;
-`;
+`
 
-export function MainLayout({ children, title='Blog MVP' }) {
+export function MainLayout({ children, title = 'Blog MVP' }) {
   return (
     <>
       <Head>
@@ -33,12 +33,14 @@ export function MainLayout({ children, title='Blog MVP' }) {
         <meta charSet="utf-8" />
       </Head>
       <Nav>
-        <Link href={'/'}><a>Home</a></Link>
-        <Link href={'/posts/newPost'}><a>New Post</a></Link>
+        <Link href={'/'}>
+          <a>Home</a>
+        </Link>
+        <Link href={'/posts/newPost'}>
+          <a>New Post</a>
+        </Link>
       </Nav>
-      <Main>
-        {children}
-      </Main>
+      <Main>{children}</Main>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 import { MainLayout } from '../../components/MainLayout'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -10,7 +10,7 @@ interface PostPageProps {
   post: MyPost
 }
 
-export default function Post( {post: serverPost}: PostPageProps ) {
+export default function Post({ post: serverPost }: PostPageProps) {
   const [post, setPost] = useState(serverPost)
   const router = useRouter()
 
@@ -20,24 +20,28 @@ export default function Post( {post: serverPost}: PostPageProps ) {
       const dataPost: MyPost = await response.data
       setPost(dataPost)
     }
-    
-    if(!serverPost) {
+
+    if (!serverPost) {
       load()
     }
   }, [])
-  
-  if(!post){
-    return <MainLayout>
-      <p>Loading...</p>
-    </MainLayout>
+
+  if (!post) {
+    return (
+      <MainLayout>
+        <p>Loading...</p>
+      </MainLayout>
+    )
   }
 
   return (
     <MainLayout title={`Post ${post.id}`}>
       <h1>{post.title}</h1>
-      <hr/>
+      <hr />
       <p>{post.body}</p>
-      <Link href={'/'}><a>Go back to posts</a></Link>
+      <Link href={'/'}>
+        <a>Go back to posts</a>
+      </Link>
     </MainLayout>
   )
 }
@@ -48,15 +52,15 @@ interface PostNextPageContext extends NextPageContext {
   }
 }
 
-Post.getInitialProps = async({ query, req }: PostNextPageContext) => {
-  if(!req) {
-    return { post : null };
-  } 
- 
+Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
+  if (!req) {
+    return { post: null }
+  }
+
   const response = await axios.get(`${query.postId}`)
   const post: MyPost[] = await response.data
 
   return {
-    post
+    post,
   }
 }
