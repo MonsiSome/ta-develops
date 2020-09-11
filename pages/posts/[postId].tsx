@@ -19,13 +19,12 @@ export default function Post({ post: serverPost }: PostPageProps) {
       const response = await axios.get(`${router.query.postId}?_embed=comments`)
       const dataPost: PostStructure = await response.data
       setPost(dataPost)
-      console.log('Datapost:', dataPost)
     }
 
     if (!serverPost) {
       load()
     }
-  }, [])
+  })
 
   if (!post) {
     return (

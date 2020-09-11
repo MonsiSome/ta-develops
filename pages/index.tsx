@@ -22,7 +22,7 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
     if (!serverPosts) {
       load()
     }
-  }, [])
+  })
 
   if (!posts) {
     return (

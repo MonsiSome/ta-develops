@@ -4,11 +4,11 @@ import axios from '../../axios/axios'
 import Router from 'next/router'
 import { CreatingPost } from '../../interfaces/creatingPost'
 
-export default function CreatePost() {
+const CreatePost: React.FunctionComponent = () => {
   const plainNewPostData: CreatingPost = { title: '', body: '' }
   const [newPostData, setPostData] = useState<CreatingPost>({ title: '', body: '' })
 
-  const inputChangeHandler = (event) => {
+  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target
     const value = target.value
     const name = target.name
@@ -18,11 +18,11 @@ export default function CreatePost() {
     setPostData(copyPostData)
   }
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault()
     axios
       .post('', newPostData)
-      .then(function (response) {
+      .then(function () {
         const plainPostData: CreatingPost = Object.assign({}, plainNewPostData)
         setPostData(plainPostData)
         Router.push('/')
@@ -52,3 +52,5 @@ export default function CreatePost() {
     </MainLayout>
   )
 }
+
+export default CreatePost
