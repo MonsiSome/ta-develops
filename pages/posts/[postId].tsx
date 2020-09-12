@@ -37,11 +37,11 @@ const Section = styled.section`
   > ul {
     list-style: none;
     padding: 0;
-    margin: 0 auto;
   }
 `
 const Li = styled.li`
   padding: 1.2em 0;
+  text-align: start;
 `
 
 const NoComments = styled.p`

@@ -29,7 +29,7 @@ This is a simple Blog MVP | AT.
 Blog MVP has Posts and Comments features. It was developed for technical assessment for DevelopsToday
 
 ## Screenshots
-![Example screenshot](./Blog_post_MVP_Home.jpg)
+![Example screenshot](./img/Blog_post_MVP_Home.jpg)
 
 ## Technologies
 * axios - version 0.20.0
