@@ -1,17 +1,3 @@
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
 # Project Name
 This is a simple Blog MVP | AT.
 
@@ -41,7 +27,28 @@ Blog MVP has Posts and Comments features. It was developed for technical assessm
 * styled-components - version 5.2.0
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+To run this project, install it locally using npm:
+
+```
+$ cd ../ta-develops-today
+$ npm install
+$ npm run build
+$ npm run start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Commands to install this project locally using npm, modify and lint it:
+
+```
+$ cd ../ta-develops-today
+$ npm install
+$ npm run lint
+$ npm run dev
+```
+
+Lint command checks on errors with Linter&Prettier, makes possible autofix.
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
 ## Features
 List of features ready and TODOs for future development
