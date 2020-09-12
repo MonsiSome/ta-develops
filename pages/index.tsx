@@ -1,16 +1,18 @@
 import Link from 'next/link'
 import { MainLayout } from '../components/MainLayout'
-import { useState, useEffect } from 'react'
-import { PostStructure } from '../interfaces/posts'
-import { NextPageContext } from 'next'
+// import { PostsStructure } from '../interfaces/posts'
 import axios from '../axios/axios'
 import styled from 'styled-components/macro'
+import { wrapper, State } from '../store/store'
+import { useSelector } from 'react-redux'
+import React from 'react'
+// import { NextPage } from 'next'
 
-const Loading = styled.p`
-  width: 60%;
-  margin: 0 auto;
-  padding: 1.2em;
-`
+// const Loading = styled.p`
+//   width: 60%;
+//   margin: 0 auto;
+//   padding: 1.2em;
+// `
 
 const HeaderPosts = styled.header`
   width: 60%;
@@ -43,32 +45,18 @@ const Anchor = styled.a`
   }
 `
 
-interface PostsPageProps {
-  posts: PostStructure[]
-}
-
-export default function Index({ posts: serverPosts }: PostsPageProps) {
-  const [posts, setPosts] = useState(serverPosts)
-
-  useEffect(() => {
-    async function load() {
-      const response = await axios.get('')
-      const json = await response.data
-      setPosts(json)
-    }
-
-    if (!serverPosts) {
-      load()
-    }
-  })
-
-  if (!posts) {
-    return (
-      <MainLayout>
-        <Loading>Loading...</Loading>
-      </MainLayout>
-    )
-  }
+export default function Page() {
+  const { posts } = useSelector<State, State>((posts) => posts)
+  console.log('This is Monsi State:', posts)
+  // const render = (state) => {
+  //   if (state.isPending) {
+  //     return (
+  //       <MainLayout>
+  //         <Loading>Loading...</Loading>
+  //       </MainLayout>
+  //     )
+  //   }
+  // }
 
   return (
     <MainLayout>
@@ -89,15 +77,31 @@ export default function Index({ posts: serverPosts }: PostsPageProps) {
   )
 }
 
-Index.getInitialProps = async ({ req }: NextPageContext) => {
-  if (!req) {
-    return { post: null }
-  }
-
-  const response = await axios.get('')
-  const posts: PostStructure[] = await response.data
-
+function someAsyncAction() {
   return {
-    posts,
+    type: 'GET_POSTS',
+    payload: new Promise((resolve) => {
+      axios.get('').then((response) => {
+        console.log(response.data)
+        resolve(response.data)
+      })
+    }),
   }
 }
+
+// const render = (state) => {
+//   if (state.isPending) {
+//     return (
+//       <MainLayout>
+//         <Loading>Loading...</Loading>
+//       </MainLayout>
+//     )
+//   }
+// }
+
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
+  // render({})
+  // store.subscribe(() => render(store.getState()))
+  console.log('2. Page.getServerSideProps uses the store to dispatch things')
+  await store.dispatch(someAsyncAction())
+})

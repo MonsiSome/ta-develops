@@ -1,9 +1,12 @@
 import { MainLayout } from '../../components/MainLayout'
-import { useState } from 'react'
+// import { useState } from 'react'
 import axios from '../../axios/axios'
 import Router from 'next/router'
 import { CreatingPost } from '../../interfaces/creatingPost'
 import styled from 'styled-components/macro'
+import { wrapper, State } from '../../store/store'
+import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
 
 const HeaderH1 = styled.h1`
   width: 60%;
@@ -48,26 +51,30 @@ const Submit = styled.input`
 `
 
 const CreatePost: React.FunctionComponent = () => {
-  const plainNewPostData: CreatingPost = { title: '', body: '' }
-  const [newPostData, setPostData] = useState<CreatingPost>({ title: '', body: '' })
+  const { createPostData } = useSelector<State, State>((createPostData) => createPostData)
+  console.log('This is Create Post:', createPostData)
+  // const plainNewPostData: CreatingPost = { title: '', body: '' }
+  // const [newPostData, setPostData] = useState<CreatingPost>({ title: '', body: '' })
+  const dispatch = useDispatch()
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = event.target
     const value = target.value
     const name = target.name
 
-    const copyPostData: CreatingPost = Object.assign({}, newPostData)
+    const copyPostData: CreatingPost = Object.assign({}, createPostData)
     copyPostData[name] = value
-    setPostData(copyPostData)
+    dispatch({ type: 'ADD_POST_DATA', payload: copyPostData })
   }
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault()
     axios
-      .post('', newPostData)
+      .post('', createPostData)
       .then(function () {
-        const plainPostData: CreatingPost = Object.assign({}, plainNewPostData)
-        setPostData(plainPostData)
+        dispatch({ type: 'CLEAR_POST_DATA' })
+        // const plainPostData: CreatingPost = Object.assign({}, plainNewPostData)
+        // setPostData(plainPostData)
         Router.push('/')
       })
       .catch(function (error) {
@@ -84,7 +91,7 @@ const CreatePost: React.FunctionComponent = () => {
           type="text"
           name="title"
           id="postTitle"
-          value={newPostData.title}
+          value={createPostData.title}
           onChange={inputChangeHandler}
           required
           autoFocus
@@ -93,7 +100,7 @@ const CreatePost: React.FunctionComponent = () => {
         <textarea
           name="body"
           id="postBody"
-          value={newPostData.body}
+          value={createPostData.body}
           cols={45}
           rows={10}
           onChange={inputChangeHandler}

@@ -25,6 +25,11 @@ Blog MVP has Posts and Comments features. It was developed for technical assessm
 * react-dom - version 16.13.1
 * react-is - version 16.13.1
 * styled-components - version 5.2.0
+* next-redux-wrapper - version 6.0.2
+* react-redux - version 7.2.1
+* redux - version 4.0.5
+* redux-logger - version 3.0.6
+* redux-promise-middleware - version 6.1.2
 
 ## Setup
 To run this project, install it locally using npm:
@@ -57,11 +62,10 @@ List of features ready and TODOs for future development
 * You are able to create a new post on Create Post page (`/posts/new` route)
 
 To-do list:
-* Add Redux as data layer with any middlewares
 * Deploy the app to any free hosting
 
 ## Status
-Project is: _in progress_ becuse I need to add Redux store, but the time is up for technical assessment.
+Project is: _finished_
 
 ## Inspiration
 Project inspired by DevelopsToday.
