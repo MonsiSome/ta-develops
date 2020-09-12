@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -14,17 +12,52 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+# Project Name
+This is a simple Blog MVP | AT.
 
-To learn more about Next.js, take a look at the following resources:
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Status](#status)
+* [Inspiration](#inspiration)
+* [Contact](#contact)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## General info
+Blog MVP has Posts and Comments features. It was developed for technical assessment for DevelopsToday
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Screenshots
+![Example screenshot](./Blog_post_MVP_Home.jpg)
 
-## Deploy on Vercel
+## Technologies
+* axios - version 0.20.0
+* babel-plugin-macros - version 2.8.0
+* next - version 9.5.3
+* react - version 16.13.1
+* react-dom - version 16.13.1
+* react-is - version 16.13.1
+* styled-components - version 5.2.0
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Setup
+Describe how to install / setup your local environement / add link to demo version.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Features
+List of features ready and TODOs for future development
+* The blog has Latest Posts page (/ route)
+* The blog has Post page (`/posts/:postId` route)
+* You are able to create a new post on Create Post page (`/posts/new` route)
+
+To-do list:
+* Add Redux as data layer with any middlewares
+* Deploy the app to any free hosting
+
+## Status
+Project is: _in progress_ becuse I need to add Redux store, but the time is up for technical assessment.
+
+## Inspiration
+Project inspired by DevelopsToday.
+
+## Contact
+Created by [@MonsiSome](https://github.com/MonsiSome/) - feel free to contact me!
