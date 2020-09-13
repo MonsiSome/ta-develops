@@ -1,0 +1,2 @@
+export const ADD_POST_DATA = 'ADD_POST_DATA'
+export const CLEAR_POST_DATA = 'CLEAR_POST_DATA'

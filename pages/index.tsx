@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { MainLayout } from '../components/MainLayout'
-import axios from '../axios/axios'
 import styled from 'styled-components/macro'
-import { wrapper, State } from '../store/store'
+import { wrapper } from '../store/store'
 import { useSelector } from 'react-redux'
 import React from 'react'
+import { getPostsAction } from '../store/actions/actions'
+import { State } from '../store/reducers/reducer'
 
 const Loading = styled.p`
   width: 60%;
@@ -73,17 +74,7 @@ export default function Page() {
   )
 }
 
-function someAsyncAction() {
-  return {
-    type: 'GET_POSTS',
-    payload: new Promise((resolve) => {
-      axios.get('').then((response) => {
-        resolve(response.data)
-      })
-    }),
-  }
-}
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
-  await store.dispatch(someAsyncAction())
+  await store.dispatch(getPostsAction())
 })

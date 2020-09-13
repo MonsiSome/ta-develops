@@ -1,10 +1,11 @@
 import { MainLayout } from '../../components/MainLayout'
 import Link from 'next/link'
-import axios from '../../axios/axios'
 import styled from 'styled-components/macro'
-import { wrapper, State } from '../../store/store'
+import { wrapper } from '../../store/store'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
+import { getOnePostAction } from '../../store/actions/actions'
+import { State } from '../../store/reducers/reducer'
 
 const Loading = styled.p`
   width: 60%;
@@ -101,17 +102,6 @@ export default function Post() {
   )
 }
 
-function someAsyncAction(id) {
-  return {
-    type: 'OPEN_POST',
-    payload: new Promise((resolve) => {
-      axios.get(`${id}?_embed=comments`).then((response) => {
-        resolve(response.data)
-      })
-    }),
-  }
-}
-
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store, params }) => {
-  await store.dispatch(someAsyncAction(params.postId))
+  await store.dispatch(getOnePostAction(params.postId))
 })

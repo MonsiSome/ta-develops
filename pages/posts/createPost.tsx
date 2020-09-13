@@ -3,9 +3,10 @@ import axios from '../../axios/axios'
 import Router from 'next/router'
 import { CreatingPost } from '../../interfaces/creatingPost'
 import styled from 'styled-components/macro'
-import { State } from '../../store/store'
+import { State } from '../../store/reducers/reducer'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
+import { ADD_POST_DATA, CLEAR_POST_DATA } from '../../store/actions/actionTypes'
 
 const HeaderH1 = styled.h1`
   width: 60%;
@@ -60,7 +61,7 @@ const CreatePost: React.FunctionComponent = () => {
 
     const copyPostData: CreatingPost = Object.assign({}, createPostData)
     copyPostData[name] = value
-    dispatch({ type: 'ADD_POST_DATA', payload: copyPostData })
+    dispatch({ type: ADD_POST_DATA, payload: copyPostData })
   }
 
   const onSubmitHandler = (event: React.FormEvent) => {
@@ -68,7 +69,7 @@ const CreatePost: React.FunctionComponent = () => {
     axios
       .post('', createPostData)
       .then(function () {
-        dispatch({ type: 'CLEAR_POST_DATA' })
+        dispatch({ type: CLEAR_POST_DATA })
         Router.push('/')
       })
       .catch(function (error) {
