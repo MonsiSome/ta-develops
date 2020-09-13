@@ -2,10 +2,10 @@ import { MainLayout } from '../../components/MainLayout'
 import Link from 'next/link'
 import styled from 'styled-components/macro'
 import { wrapper } from '../../store/store'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import React from 'react'
 import { getOnePostAction } from '../../store/actions/actions'
-import { State } from '../../store/reducers/reducer'
+import { State } from '../../interfaces/state'
 
 const Loading = styled.p`
   width: 60%;
@@ -64,9 +64,8 @@ const GoBack = styled.a`
   }
 `
 
-export default function Post() {
+export default function Post(): JSX.Element {
   const { openedPost } = useSelector<State, State>((openedPost) => openedPost)
-  const dispatch = useDispatch()
 
   if (!openedPost) {
     return (

@@ -1,32 +1,22 @@
-import { AnyAction } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
 import { ADD_POST_DATA, CLEAR_POST_DATA } from '../actions/actionTypes'
+import { postsStructure } from '../../interfaces/postsStructure'
+import { openPostStructure } from '../../interfaces/openPostStructure'
+import { State } from '../../interfaces/state'
+import { creatPostStructure } from '../../interfaces/creatPostStructure'
 
-export interface State {
-  posts?: Array<{
-    id: string | number
-    title: string
-    body: string
-  }>
-  openedPost?: {
-    id: string | number
-    title: string
-    body: string
-    comments?: Array<{
-      id: number
-      posdId: number
-      body: string
-    }>
-    createPostData: {
-      title: string
-      body: string
-    }
-  }
-}
+type Action =
+  | { type: typeof HYDRATE; payload: State }
+  | { type: 'GET_POSTS_PENDING'; payload: State }
+  | { type: 'GET_POSTS_FULFILLED'; payload: postsStructure[] }
+  | { type: 'OPEN_POST_PENDING'; payload: State }
+  | { type: 'OPEN_POST_FULFILLED'; payload: openPostStructure }
+  | { type: typeof ADD_POST_DATA; payload: creatPostStructure }
+  | { type: typeof CLEAR_POST_DATA; payload: creatPostStructure }
 
 const initialState = { createPostData: { title: '', body: '' } }
 
-export const reducer = (state: State = initialState, action: AnyAction) => {
+export const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload }

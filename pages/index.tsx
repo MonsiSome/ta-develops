@@ -5,7 +5,7 @@ import { wrapper } from '../store/store'
 import { useSelector } from 'react-redux'
 import React from 'react'
 import { getPostsAction } from '../store/actions/actions'
-import { State } from '../store/reducers/reducer'
+import { State } from '../interfaces/state'
 
 const Loading = styled.p`
   width: 60%;
@@ -44,7 +44,7 @@ const Anchor = styled.a`
   }
 `
 
-export default function Page() {
+export default function Page(): JSX.Element {
   const { posts } = useSelector<State, State>((posts) => posts)
 
   if (!posts) {
@@ -73,7 +73,6 @@ export default function Page() {
     </MainLayout>
   )
 }
-
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
   await store.dispatch(getPostsAction())

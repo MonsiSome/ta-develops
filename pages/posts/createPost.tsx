@@ -1,12 +1,12 @@
 import { MainLayout } from '../../components/MainLayout'
 import axios from '../../axios/axios'
 import Router from 'next/router'
-import { CreatingPost } from '../../interfaces/creatingPost'
+import { creatPostStructure } from '../../interfaces/creatPostStructure'
 import styled from 'styled-components/macro'
-import { State } from '../../store/reducers/reducer'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import { ADD_POST_DATA, CLEAR_POST_DATA } from '../../store/actions/actionTypes'
+import { State } from '../../interfaces/state'
 
 const HeaderH1 = styled.h1`
   width: 60%;
@@ -50,7 +50,7 @@ const Submit = styled.input`
   }
 `
 
-const CreatePost: React.FunctionComponent = () => {
+const CreatePost: JSX.Element = () => {
   const { createPostData } = useSelector<State, State>((createPostData) => createPostData)
   const dispatch = useDispatch()
 
@@ -59,7 +59,7 @@ const CreatePost: React.FunctionComponent = () => {
     const value = target.value
     const name = target.name
 
-    const copyPostData: CreatingPost = Object.assign({}, createPostData)
+    const copyPostData: creatPostStructure = Object.assign({}, createPostData)
     copyPostData[name] = value
     dispatch({ type: ADD_POST_DATA, payload: copyPostData })
   }

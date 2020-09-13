@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import styled from 'styled-components/macro'
+import React from 'react'
 
 const Nav = styled.nav`
   position: fixed;
@@ -47,7 +48,12 @@ const Main = styled.main`
   width: 60%;
 `
 
-export function MainLayout({ children, title = 'Blog MVP' }) {
+interface AppProps {
+  title?: string
+  children?: JSX.Element | JSX.Element[]
+}
+
+export function MainLayout({ children, title = 'Blog MVP' }: AppProps): JSX.Element {
   return (
     <>
       <Head>
