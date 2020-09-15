@@ -11,10 +11,7 @@ export function getPostsAction() {
   }
 }
 
-export interface Id {
-  id: string | number
-}
-export function getOnePostAction(id: Id) {
+export function getOnePostAction(id) {
   return {
     type: 'OPEN_POST',
     payload: new Promise((resolve) => {

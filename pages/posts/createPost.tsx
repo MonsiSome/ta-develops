@@ -50,7 +50,7 @@ const Submit = styled.input`
   }
 `
 
-const CreatePost: JSX.Element = () => {
+export default function CreatePost(): JSX.Element {
   const { createPostData } = useSelector<State, State>((createPostData) => createPostData)
   const dispatch = useDispatch()
 
@@ -106,5 +106,3 @@ const CreatePost: JSX.Element = () => {
     </MainLayout>
   )
 }
-
-export default CreatePost

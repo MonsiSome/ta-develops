@@ -5,18 +5,25 @@ import { openPostStructure } from '../../interfaces/openPostStructure'
 import { State } from '../../interfaces/state'
 import { creatPostStructure } from '../../interfaces/creatPostStructure'
 
-type Action =
-  | { type: typeof HYDRATE; payload: State }
-  | { type: 'GET_POSTS_PENDING'; payload: State }
-  | { type: 'GET_POSTS_FULFILLED'; payload: postsStructure[] }
-  | { type: 'OPEN_POST_PENDING'; payload: State }
-  | { type: 'OPEN_POST_FULFILLED'; payload: openPostStructure }
-  | { type: typeof ADD_POST_DATA; payload: creatPostStructure }
-  | { type: typeof CLEAR_POST_DATA; payload: creatPostStructure }
+export interface Action<T = any> {
+  type:
+    | T
+    | { type: typeof HYDRATE; payload: State }
+    | { type: 'GET_POSTS_PENDING'; payload: State }
+    | { type: 'GET_POSTS_FULFILLED'; payload: postsStructure[] }
+    | { type: 'OPEN_POST_PENDING'; payload: State }
+    | { type: 'OPEN_POST_FULFILLED'; payload: openPostStructure }
+    | { type: typeof ADD_POST_DATA; payload: creatPostStructure }
+    | { type: typeof CLEAR_POST_DATA; payload: creatPostStructure }
+}
+
+export interface AnyAction extends Action {
+  [extraProps: string]: any
+}
 
 const initialState = { createPostData: { title: '', body: '' } }
 
-export const reducer = (state: State = initialState, action: Action): State => {
+export const reducer = (state: State = initialState, action: AnyAction): State => {
   switch (action.type) {
     case HYDRATE:
       return { ...state, ...action.payload }
