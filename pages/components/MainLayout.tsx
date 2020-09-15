@@ -53,7 +53,7 @@ interface AppProps {
   children?: JSX.Element | JSX.Element[]
 }
 
-export function MainLayout({ children, title = 'Blog MVP' }: AppProps): JSX.Element {
+export default function MainLayout({ children, title = 'Blog MVP' }: AppProps): JSX.Element {
   return (
     <>
       <Head>

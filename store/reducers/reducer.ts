@@ -21,7 +21,7 @@ export interface AnyAction extends Action {
   [extraProps: string]: any
 }
 
-const initialState = { createPostData: { title: '', body: '' } }
+export const initialState = { createPostData: { title: '', body: '' } }
 
 export const reducer = (state: State = initialState, action: AnyAction): State => {
   switch (action.type) {

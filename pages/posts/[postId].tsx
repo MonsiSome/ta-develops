@@ -1,4 +1,3 @@
-import { MainLayout } from '../../components/MainLayout'
 import Link from 'next/link'
 import styled from 'styled-components/macro'
 import { wrapper } from '../../store/store'
@@ -6,6 +5,7 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import { getOnePostAction } from '../../store/actions/actions'
 import { State } from '../../interfaces/state'
+import MainLayout from '../components/MainLayout'
 
 const Loading = styled.p`
   width: 60%;

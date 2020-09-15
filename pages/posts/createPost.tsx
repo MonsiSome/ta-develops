@@ -1,4 +1,3 @@
-import { MainLayout } from '../../components/MainLayout'
 import axios from '../../axios/axios'
 import Router from 'next/router'
 import { creatPostStructure } from '../../interfaces/creatPostStructure'
@@ -7,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import { ADD_POST_DATA, CLEAR_POST_DATA } from '../../store/actions/actionTypes'
 import { State } from '../../interfaces/state'
+import MainLayout from '../components/MainLayout'
 
 const HeaderH1 = styled.h1`
   width: 60%;
