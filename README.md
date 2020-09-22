@@ -8,7 +8,6 @@ This is a simple Blog MVP | AT.
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
@@ -61,14 +60,8 @@ List of features ready and TODOs for future development
 * The blog has Post page (`/posts/:postId` route)
 * You are able to create a new post on Create Post page (`/posts/new` route)
 
-To-do list:
-* Deploy the app to any free hosting
-
 ## Status
 Project is: _finished_
-
-## Inspiration
-Project inspired by DevelopsToday.
 
 ## Contact
 Created by [@MonsiSome](https://github.com/MonsiSome/) - feel free to contact me!
